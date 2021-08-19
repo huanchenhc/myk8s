@@ -11,6 +11,7 @@ class Myk8sApplicationTests {
 		System.out.print("testing");
 		System.out.print("testing again");
 		System.out.print("testing in eclipse");
+		System.out.print("testing in eclipse");
 	}
 
 }
