@@ -10,6 +10,7 @@ class Myk8sApplicationTests {
 	void contextLoads() {
 		System.out.print("testing");
 		System.out.print("testing again");
+		System.out.print("testing in eclipse");
 	}
 
 }
