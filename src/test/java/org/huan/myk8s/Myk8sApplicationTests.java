@@ -13,6 +13,7 @@ class Myk8sApplicationTests {
 		System.out.print("testing in eclipse");
 		System.out.print("testing in eclipse");
 		// making chanage at github repo
+		System.out.print("testing in git bash");
 	}
 
 }
