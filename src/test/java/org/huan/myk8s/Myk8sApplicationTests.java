@@ -9,6 +9,9 @@ class Myk8sApplicationTests {
 	@Test
 	void contextLoads() {
 		System.out.print("testing");
+		System.out.print("testing again");
 	}
 
 }
+
+
