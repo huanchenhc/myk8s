@@ -13,7 +13,7 @@ public class BookMapper implements RowMapper<BookDTO> {
 		BookDTO o = new BookDTO();
 		o.setId(rs.getString("bid"));
 		o.setTitle(rs.getString("title"));
-		//o.setDescription(rs.getString("description"));
+		o.setDescription(rs.getString("description"));
 	    return o;
 	}
 }

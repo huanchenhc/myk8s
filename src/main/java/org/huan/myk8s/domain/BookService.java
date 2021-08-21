@@ -66,12 +66,32 @@ public class BookService {
 	}
 	
 	@Transactional
-	public boolean updateBook(final BookDTO book) {
-		return bookDAOService.updateBook(BookMapperUtil.toEntity(book));
+	public void updateBook(final BookDTO book) {
+		bookDAOService.updateBook(BookMapperUtil.toEntity(book));
 	}	
 
 	@Transactional
 	public boolean deleteBook(final String id) {
 		return bookDAOService.deleteBook(id);
 	}
+
+	public List<BookDTO> retrieveBookIDLessThanWithPagination(String id, Integer pageNo,
+			Integer pageSize) {
+		List<BookDTO> findBookIDLessThan = bookDAOService.findBookIDlessThan(id,pageNo,pageSize);
+		if(findBookIDLessThan != null) {
+			return findBookIDLessThan;
+		} else {
+			return new ArrayList<BookDTO>();
+		}
+	}
+
+	public List<BookDTO> retrieveBooksWithkeywords(String keywords, Integer pageNo, Integer pageSize) {
+		List<BookDTO> findBooksWithkeywords = bookDAOService.findBooksWithkeywords(keywords,pageNo,pageSize);
+		if(findBooksWithkeywords != null) {
+			return findBooksWithkeywords;
+		} else {
+			return new ArrayList<BookDTO>();
+		}
+	}
+	
 }

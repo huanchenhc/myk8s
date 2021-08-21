@@ -20,10 +20,10 @@ public class BookDAOTest {
 	@Test()
 	@DisplayName("findbook dao test ")
 	void testFindbookDAO() {
-		BookDTO res = bookDAO.findBook("02"); 
+		BookDTO res = bookDAO.findBook("05"); 
 		//assertEquals(3, res.size());
-		assertEquals("02", res.getId());
-		assertEquals("Awesome Engineering Activities for Kids", res.getTitle());
+		assertEquals("05", res.getId());
+		assertEquals("My school is back", res.getTitle());
 		
 	
 	}
@@ -32,7 +32,7 @@ public class BookDAOTest {
 	@DisplayName("findbook dao test ")
 	void testFindbookDAO_notFound() {
 		assertThrows(BookNotFoundException.class, () -> {
-			bookDAO.findBook("05");
+			bookDAO.findBook("06");
 		  });
 		
 	
@@ -40,7 +40,7 @@ public class BookDAOTest {
 	
 	@Test
 	@DisplayName("createBook dao test ")
-	void createBookDAO() {
+	void testCreateBookDAO() {
 		Book book = new Book();
 		book.setBid("05");
 		book.setTitle("My Summer Fun");
@@ -52,6 +52,21 @@ public class BookDAOTest {
 		assertEquals("My Summer Fun", res.getTitle());
 	}
 
+	
+	@Test
+	@DisplayName("createBook dao test ")
+	void testUpdateBookDAO() {
+		Book book = new Book();
+		book.setBid("05");
+		book.setTitle("My school was back");
+		book.setDescription("Ethan's book");
+		bookDAO.updateBook(book); 
+		//bookDAO.updateBook("05","My school is back","Ethan's book"); 
+		
+		BookDTO res = bookDAO.findBook("05"); 
+		assertEquals("05", res.getId());
+		assertEquals("My school was back", res.getTitle());
+	}
 	
 	@Test
 	void testDeleteBookDAO() {
