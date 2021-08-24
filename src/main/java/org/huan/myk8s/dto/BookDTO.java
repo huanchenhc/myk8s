@@ -2,7 +2,12 @@ package org.huan.myk8s.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.couchbase.core.mapping.Document;
+
+@Document
 public class BookDTO {
+	@Id
 	private String id;
 	private String ISBN;
 	private long LID;

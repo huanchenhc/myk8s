@@ -33,12 +33,17 @@ public class BookController {
     
 	@GetMapping("/books/{id}")
 	public BookDTO retrieveBook(@PathVariable  String id)  {
-		return bookService.retrieveBookID(id);
+		return bookService.retrieveBookID(id,true);
 	}
     
+	@GetMapping("/books/withoutcache/{id}")
+	public BookDTO retrieveBookWithoutCache(@PathVariable  String id)  {
+		return bookService.retrieveBookID(id,false);
+	}
+	
 	@GetMapping("/books")
 	public BookDTO retrieveBookbyPra(@RequestParam  String id)  {
-		return bookService.retrieveBookID(id);
+		return bookService.retrieveBookID(id,true);
 	}
 	
 	
@@ -54,6 +59,14 @@ public class BookController {
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam String keywords)  {
 		return bookService.retrieveBooksWithkeywords(keywords, pageNo, pageSize);
+	}
+	
+	
+	@GetMapping("/bookskeywords/withcache")
+	public List<BookDTO> retrieveAllUsersWithkeywordsFromCache(@RequestParam(defaultValue = "0") Integer pageNo, 
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam String keywords)  {
+		return bookService.retrieveBooksWithkeywordsFromCache(keywords, pageNo, pageSize);
 	}
 	
 	@PostMapping("/books")
