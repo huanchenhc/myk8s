@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.huan.myk8s.controller.util.HeaderUtil;
 import org.huan.myk8s.domain.BookService;
 import org.huan.myk8s.dto.BookDTO;
+import org.huan.myk8s.elasticsearch.BookProduct;
+import org.huan.myk8s.elasticsearch.ProductSearchService;
 import org.huan.myk8s.exception.BookNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +31,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class BookController {
 	@Autowired
 	BookService bookService;
+	
+	@Autowired
+	private ProductSearchService productSearchService;
 	
     private final Logger log = LoggerFactory.getLogger(BookController.class);
     
@@ -107,6 +113,16 @@ public class BookController {
 			throw new BookNotFoundException("USER0001", "id-"+ id);
 	}
 	
+
+	@GetMapping("/books/elastsearch")
+	@ResponseBody
+	public List<BookProduct> fetchByNameOrDesc(@RequestParam String query) {       //(value = "q", required = false)                    
+        log.info("elasticsearch by title {}",query);
+		List<BookProduct> products = productSearchService.processSearch(query) ;
+	    log.info("products {}",products);
+		return products;
+	  }
+    
 	
 	
 	
